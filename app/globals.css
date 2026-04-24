@@ -1,26 +1,96 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* High Court of Sikkim emblem palette (navy seal, mountain sky blue) */
+  --hcs-navy: #00004b;
+  --hcs-navy-deep: #000033;
+  --hcs-navy-soft: #0f1f5c;
+  --hcs-sky: #6fa3d1;
+  --hcs-sky-light: #8ebfe5;
+  --hcs-page: #f4f6fb;
+  --background: var(--hcs-page);
+  --foreground: #0f172a;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-hcs-navy: var(--hcs-navy);
+  --color-hcs-navy-deep: var(--hcs-navy-deep);
+  --color-hcs-navy-soft: var(--hcs-navy-soft);
+  --color-hcs-sky: var(--hcs-sky);
+  --color-hcs-sky-light: var(--hcs-sky-light);
+  --color-hcs-page: var(--hcs-page);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --background: #050a18;
+    --foreground: #e8edf7;
   }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .sicm-fade-up,
+  .sicm-aurora {
+    animation: none !important;
+  }
+}
+
+.sicm-aurora {
+  background: linear-gradient(
+    125deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(111, 163, 209, 0.18) 32%,
+    rgba(244, 246, 251, 0.92) 65%,
+    rgba(0, 0, 75, 0.06) 100%
+  );
+  background-size: 200% 200%;
+  animation: sicm-aurora-shift 18s ease-in-out infinite;
+}
+
+.dark .sicm-aurora {
+  background: linear-gradient(
+    125deg,
+    rgba(5, 10, 24, 0.95) 0%,
+    rgba(0, 0, 75, 0.45) 35%,
+    rgba(15, 31, 92, 0.35) 70%,
+    rgba(111, 163, 209, 0.12) 100%
+  );
+}
+
+@keyframes sicm-aurora-shift {
+  0%,
+  100% {
+    background-position: 0% 40%;
+  }
+  50% {
+    background-position: 100% 60%;
+  }
+}
+
+.sicm-fade-up {
+  animation: sicm-fade-up 0.7s ease-out both;
+}
+
+@keyframes sicm-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
